@@ -25,6 +25,7 @@ This script streamlines the following:
 | OS | Armbian (Debian-based recommended) |
 | Network | Active internet connection |
 | Permissions | Root or sudo access |
+| Kernel | V4L2-request enabled |
 
 ---
 
