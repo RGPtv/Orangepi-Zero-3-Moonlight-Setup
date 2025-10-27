@@ -94,7 +94,7 @@ sudo reboot
 ### Useful Commands
 | Task | Command |
 |------|----------|
-| Launch Moonlight | `moonlight` |
+| Launch Moonlight | `moonlight-qt` |
 | Verify WireGuard status | `sudo wg` |
 | Restart WireGuard interface | `sudo systemctl restart wg-quick@orangepi` |
 
