@@ -52,26 +52,37 @@ You will be prompted whether to install WireGuard for remote access.
 
 ---
 
-## Script Details
+## (OPTIONAL): Auto Launch Moonlight
 
-### Moonlight-qt Installation
-- Adds the official Moonlight Cloudsmith repository  
-- Installs the following packages:
-  ```
-  moonlight-qt
-  qt6-base-dev
-  qt6-multimedia-dev
-  qt6-declarative-dev
-  alsa-ucm-conf
-  ```
-- Downloads a pre-configured `/etc/asound.conf` to ensure audio functionality  
-- Appends `export QT_QPA_PLATFORM=eglfs` to the user’s `~/.bashrc` for hardware-accelerated EGLFS rendering  
+### 1. Create a systemd service
+```bash
+sudo nano /etc/systemd/system/moonlight.service
+```
+### 2. Paste this example
+```ini
+[Unit]
+Description=Moonlight Game Streaming Client
+After=network-online.target
 
-### WireGuard Configuration (Optional)
-- Installs `wireguard`, `network-manager`, and `iptables`  
-- Prompts the user for a configuration URL and connection name  
-- Downloads the `.conf` file and secures it with proper permissions (`chmod 600`)  
-- Enables and starts the corresponding `wg-quick@<name>` systemd service  
+[Service]
+User=root
+ExecStart=/usr/bin/moonlight-qt
+Restart=on-failure
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### 3. Enable the service
+```bash
+sudo systemctl enable moonlight.service
+```
+
+### 4. Start it immediately
+```bash
+sudo systemctl start moonlight.service
+```
 
 ---
 
@@ -96,8 +107,8 @@ sudo reboot
 | Task | Command |
 |------|----------|
 | Launch Moonlight | `moonlight-qt` |
-| Verify WireGuard status | `sudo wg` |
-| Restart WireGuard interface | `sudo systemctl restart wg-quick@orangepi` |
+| Verify WireGuard status | `wg` |
+| Restart WireGuard interface | `systemctl restart wg-quick@orangepi` |
 
 ---
 
