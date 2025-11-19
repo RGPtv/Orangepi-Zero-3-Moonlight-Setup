@@ -44,8 +44,15 @@ apt install -y moonlight-qt qt6-base-dev qt6-multimedia-dev qt6-declarative-dev 
 # Install custom ALSA configuration
 #---------------------------------------------------------------
 log "Installing ALSA asound.conf..."
-curl -fsSL -o /etc/asound.conf https://raw.githubusercontent.com/RGPtv/Orangepi-Zero-3-Moonlight-Setup/refs/heads/main/asound.conf || \
-    error_exit "Failed to download /etc/asound.conf"
+
+# Check if local asound.conf exists
+if [ ! -f ./asound.conf ]; then
+    error_exit "Local asound.conf not found in script directory!"
+fi
+
+# Move the file to /etc
+mv ./asound.conf /etc/asound.conf || \
+    error_exit "Failed to move asound.conf to /etc/"
 
 #---------------------------------------------------------------
 # Apply EGLFS environment variable
