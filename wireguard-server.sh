@@ -44,7 +44,7 @@ services:
     container_name: wg-easy
 
     environment:
-      - INSECURE=false
+      - INSECURE=true
       # - PORT=51821
       # - HOST=0.0.0.0
 
