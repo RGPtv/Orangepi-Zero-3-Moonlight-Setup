@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Updating system..."
-apt update
-apt upgrade -y
-
 echo "Installing required packages..."
 apt install -y ca-certificates curl gnupg
 
